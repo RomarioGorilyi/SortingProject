@@ -1,15 +1,14 @@
 package ua.com.netcracker.training.lab00.sorting;
 
+import static ua.com.netcracker.training.lab00.sorting.Util.makeArrayCopy;
+
 /**
  * Created by Roman Horilyi on 01.11.2016.
  */
 public class BubbleSinkingSort implements Sorting {
     @Override
     public int[] sort(int[] arrayToSort) {
-        // In order not to modify the specified array that has to be sorted,
-        // we create copy of it using System.arraycopy() method.
-        int[] resultArray = new int[arrayToSort.length];
-        System.arraycopy(arrayToSort, 0, resultArray, 0, arrayToSort.length);
+        int[] resultArray = makeArrayCopy(arrayToSort); // in order not to modify the specified array
 
         boolean swapped = false;
         int indexOfFirstSortedElement = 0;
