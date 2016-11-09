@@ -1,6 +1,6 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import static ua.com.netcracker.training.lab00.sorting.Util.makeArrayCopy;
+import static ua.com.netcracker.training.lab00.Util.makeArrayCopy;
 
 /**
  * Created by Roman Horilyi on 01.11.2016.
@@ -10,7 +10,6 @@ public class MergeSort implements Sorting {
     public int[] sort(int[] arrayToSort) {
         int[] resultArray = makeArrayCopy(arrayToSort); // in order not to modify the specified array
         mergeSort(resultArray, 0, resultArray.length - 1);
-
         return resultArray;
     }
 
@@ -24,30 +23,30 @@ public class MergeSort implements Sorting {
     }
 
     private void merge(int[] arrayToSort, int leftIndex, int delimiterIndex, int rightIndex) {
-        int sizeOfLeftArray = delimiterIndex - leftIndex + 2;   // increases size of left sub-array by 1 number
+        int sizeOfLeftSubArray = delimiterIndex - leftIndex + 2;   // increases size of left sub-array by 1 number
                                                                 // that contains Integer.MAX_VALUE
                                                                 // in order to avoid ArrayIndexOutOfBoundsException
                                                                 // in case all numbers of the left sub-array are reached
-        int[] leftArray = new int[sizeOfLeftArray];
-        for (int i = 0; i < sizeOfLeftArray - 1; i++) {
-            leftArray[i] = arrayToSort[leftIndex + i];
+        int[] leftSubArray = new int[sizeOfLeftSubArray];
+        for (int i = 0; i < sizeOfLeftSubArray - 1; i++) {
+            leftSubArray[i] = arrayToSort[leftIndex + i];
         }
-        leftArray[sizeOfLeftArray - 1] = Integer.MAX_VALUE;
+        leftSubArray[sizeOfLeftSubArray - 1] = Integer.MAX_VALUE;
 
-        int sizeOfRightArray = rightIndex - delimiterIndex + 1; // similarly to the left sub-array
-        int[] rightArray = new int[sizeOfRightArray];
-        for (int i = 0; i < sizeOfRightArray - 1; i++) {
-            rightArray[i] = arrayToSort[delimiterIndex + 1 + i];
+        int sizeOfRightSubArray = rightIndex - delimiterIndex + 1; // similarly to the left sub-array
+        int[] rightSubArray = new int[sizeOfRightSubArray];
+        for (int i = 0; i < sizeOfRightSubArray - 1; i++) {
+            rightSubArray[i] = arrayToSort[delimiterIndex + 1 + i];
         }
-        rightArray[sizeOfRightArray - 1] = Integer.MAX_VALUE;
+        rightSubArray[sizeOfRightSubArray - 1] = Integer.MAX_VALUE;
 
         int leftArrayIndex = 0;
         int rightArrayIndex = 0;
         for (int i = leftIndex; i < rightIndex + 1; i++) {
-            if (leftArray[leftArrayIndex] <= rightArray[rightArrayIndex]) {
-                arrayToSort[i] = leftArray[leftArrayIndex++];
+            if (leftSubArray[leftArrayIndex] <= rightSubArray[rightArrayIndex]) {
+                arrayToSort[i] = leftSubArray[leftArrayIndex++];
             } else {
-                arrayToSort[i] = rightArray[rightArrayIndex++];
+                arrayToSort[i] = rightSubArray[rightArrayIndex++];
             }
         }
     }

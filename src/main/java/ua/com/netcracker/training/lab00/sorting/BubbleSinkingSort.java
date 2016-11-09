@@ -1,6 +1,7 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import static ua.com.netcracker.training.lab00.sorting.Util.makeArrayCopy;
+import static ua.com.netcracker.training.lab00.Util.makeArrayCopy;
+import static ua.com.netcracker.training.lab00.Util.swap;
 
 /**
  * Created by Roman Horilyi on 01.11.2016.
@@ -16,9 +17,7 @@ public class BubbleSinkingSort implements Sorting {
         do {
             for (int i = resultArray.length - 1; i > indexOfFirstSortedElement; i--) {
                 if (resultArray[i] < resultArray[i - 1]) {
-                    int tmp = resultArray[i - 1];
-                    resultArray[i - 1] = resultArray[i];
-                    resultArray[i] = tmp;
+                    swap(resultArray, i, i - 1);
                     swapped = true;
                 }
             }
