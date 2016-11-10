@@ -1,9 +1,9 @@
-package ua.com.netcracker.training.lab00;
+package ua.com.netcracker.training.lab00.util;
 
 /**
  * Created by Roman Horilyi on 09.11.2016.
  */
-public class Util {
+public class ArrayUtil {
     public static int[] makeArrayCopy(int[] array) {
         int[] resultArray = new int[array.length];
         System.arraycopy(array, 0, resultArray, 0, array.length);

@@ -1,13 +1,11 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import java.util.Arrays;
-
-import static ua.com.netcracker.training.lab00.Util.makeArrayCopy;
+import static ua.com.netcracker.training.lab00.util.ArrayUtil.makeArrayCopy;
 
 /**
  * Created by Roman Horilyi on 01.11.2016.
  */
-public class MergeSort implements Sorting {
+public class MergeSort implements SortingBehavior {
     @Override
     public int[] sort(int[] arrayToSort) {
         int[] resultArray = makeArrayCopy(arrayToSort); // in order not to modify the specified array
