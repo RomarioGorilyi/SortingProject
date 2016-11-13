@@ -5,7 +5,9 @@ package ua.com.netcracker.training.lab00.sorting;
  */
 public class NoSorting implements SortingBehavior {
     @Override
-    public int[] sort(int[] arrayToSort) {
-        return arrayToSort;
+    /**
+     * Doesn't sort the specified array.
+     */
+    public void sort(int[] array) {
     }
 }

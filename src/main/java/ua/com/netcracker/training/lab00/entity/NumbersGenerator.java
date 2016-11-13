@@ -17,6 +17,6 @@ public abstract class NumbersGenerator {
 
     public int[] generateNumbers(int length) {
         int[] numbers = generationBehavior.generateNumbers(length);
-        return sortingBehavior.sort(numbers);
+        return sortingBehavior.obtainSortedArray(numbers);
     }
 }

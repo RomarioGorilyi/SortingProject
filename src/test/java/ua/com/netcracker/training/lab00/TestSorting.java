@@ -5,8 +5,6 @@ import org.junit.Test;
 import ua.com.netcracker.training.lab00.entity.*;
 import ua.com.netcracker.training.lab00.sorting.*;
 
-import java.util.Arrays;
-
 /**
  * Created by Roman Horilyi on 09.11.2016.
  */
@@ -16,7 +14,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new BubbleFloatingUpSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);
@@ -27,7 +25,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new BubbleSinkingSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);
@@ -38,7 +36,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new MergeSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);
@@ -49,7 +47,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new QuickSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);
@@ -60,7 +58,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new JavaSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);
@@ -71,7 +69,7 @@ public class TestSorting {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
         SortingBehavior sorting = new JavaReverseSort();
-        int[] sortedArray = sorting.sort(unsortedArray);
+        int[] sortedArray = sorting.obtainSortedArray(unsortedArray);
         int[] expectedSortedArray = {18, 15, 6, 5, 2, 0, -1};
 
         Assert.assertArrayEquals(expectedSortedArray, sortedArray);

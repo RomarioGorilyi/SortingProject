@@ -1,6 +1,5 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import static ua.com.netcracker.training.lab00.util.ArrayUtil.makeArrayCopy;
 import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
 
 /**
@@ -8,34 +7,32 @@ import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
  */
 public class QuickSort implements SortingBehavior {
     @Override
-    public int[] sort(int[] arrayToSort) {
-        int[] resultArray = makeArrayCopy(arrayToSort); // in order not to modify the specified array
-        quickSort(resultArray, 0, resultArray.length - 1);
-        return resultArray;
+    public void sort(int[] array) {
+        quickSort(array, 0, array.length - 1);
     }
 
-    private void quickSort(int[] arrayToSort, int leftIndex, int rightIndex) {
-        int index = partition(arrayToSort, leftIndex, rightIndex);
+    private void quickSort(int[] array, int leftIndex, int rightIndex) {
+        int index = partition(array, leftIndex, rightIndex);
         if (leftIndex < index - 1) {
-            quickSort(arrayToSort, leftIndex, index - 1);
+            quickSort(array, leftIndex, index - 1);
         }
         if (rightIndex > index) {
-            quickSort(arrayToSort, index, rightIndex);
+            quickSort(array, index, rightIndex);
         }
     }
 
-    private int partition(int[] arrayToSort, int leftIndex, int rightIndex) {
-        int pivot = arrayToSort[(leftIndex + rightIndex) / 2];
+    private int partition(int[] array, int leftIndex, int rightIndex) {
+        int pivot = array[(leftIndex + rightIndex) / 2];
 
         while (leftIndex <= rightIndex) {
-            while (arrayToSort[leftIndex] < pivot) {
+            while (array[leftIndex] < pivot) {
                 leftIndex++;
             }
-            while (arrayToSort[rightIndex] > pivot) {
+            while (array[rightIndex] > pivot) {
                 rightIndex--;
             }
             if (leftIndex <= rightIndex) {
-                swap(arrayToSort, leftIndex, rightIndex);
+                swap(array, leftIndex, rightIndex);
                 leftIndex++;
                 rightIndex--;
             }
