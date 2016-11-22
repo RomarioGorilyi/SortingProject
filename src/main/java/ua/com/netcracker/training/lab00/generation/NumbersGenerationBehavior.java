@@ -1,7 +1,7 @@
-package ua.com.netcracker.training.lab00.numbersGeneration;
+package ua.com.netcracker.training.lab00.generation;
 
 /**
- * Created by Roman Horilyi on 10.11.2016.
+ * @author Horilyi
  */
 @FunctionalInterface
 public interface NumbersGenerationBehavior {

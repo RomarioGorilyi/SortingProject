@@ -1,11 +1,15 @@
-package ua.com.netcracker.training.lab00.numbersGeneration;
+package ua.com.netcracker.training.lab00.generation;
 
 import java.security.SecureRandom;
 
 /**
- * Created by Roman Horilyi on 10.11.2016.
+ * @author Horilyi
  */
 public class RandomGeneration implements NumbersGenerationBehavior {
+
+    /**
+     * Generates an array of numbers with the specified length randomly.
+     */
     @Override
     public int[] generateNumbers(int quantity) {
         int[] numbers = new int[quantity];

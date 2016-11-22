@@ -1,11 +1,15 @@
 package ua.com.netcracker.training.lab00.sorting;
 
+import ua.com.netcracker.training.lab00.annotation.Sortable;
+
 import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
 
 /**
- * Created by Roman Horilyi on 01.11.2016.
+ * @author Horilyi
  */
+@Sortable(name = "BubbleSort", type = "ascending & floating up")
 public class BubbleFloatingUpSort implements SortingBehavior {
+
     @Override
     public void sort(int[] array) {
         boolean swapped = false;
