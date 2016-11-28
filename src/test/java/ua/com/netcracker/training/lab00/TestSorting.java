@@ -1,14 +1,22 @@
 package ua.com.netcracker.training.lab00;
 
+import org.apache.poi.sl.draw.geom.Path;
 import org.junit.Assert;
 import org.junit.Test;
 import ua.com.netcracker.training.lab00.annotation.Sorting;
+import ua.com.netcracker.training.lab00.annotation.Todo;
+import ua.com.netcracker.training.lab00.excel.StatisticsWriter;
 import ua.com.netcracker.training.lab00.generation.RandomGeneration;
 import ua.com.netcracker.training.lab00.generator.*;
 import ua.com.netcracker.training.lab00.sorting.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 /**
  * @author Horilyi
@@ -93,6 +101,17 @@ public class TestSorting {
     }
 
     @Test
+    public void testNoSorting() {
+        int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
+
+        SortingBehavior sorting = new NoSorting();
+        int[] sortedArray = sorting.findSortedArray(unsortedArray);
+        int[] expectedSortedArray = {18, 5, -1, 0, 6, 2, 15};
+
+        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
+    }
+
+    @Test
     public void testUnsortedGenerator() {
         NumbersGenerator generator = new UnsortedGenerator(new RandomGeneration(), new JavaSort());
         int[] numbers = generator.generateNumbers(10);
@@ -129,21 +148,52 @@ public class TestSorting {
     }
 
     @Test
-    public void testSortableAnnotation() {
-        NumbersGenerator generator = new AscendingGenerator(new RandomGeneration(), new JavaSort());
-        Field[] fields = generator.getClass().getDeclaredFields();
+    public void testStatisticsWriterWithEmptyStatistics() {
+        StatisticsWriter statisticsWriter = new StatisticsWriter();
+        statisticsWriter.writeStatistics(new HashMap<>());
+    }
 
-        for (Field field : fields) {
-            System.out.println(field.getName());
-            Annotation[] annotations = field.getDeclaredAnnotations();
+    @Test(expected = NoSuchElementException.class)
+    public void testStatisticsWriterOfGeneratorWithEmptyStatistics() {
+        Map<String, Map<String, List<Long>>> statistics = new HashMap<>();
+        statistics.put("Generator", new HashMap<>());
 
-            for (Annotation annotation : annotations) {
-                if (annotation instanceof Sorting) {
-                    Sorting myAnnotation = (Sorting) annotation;
-                    System.out.println("name: " + myAnnotation.name());
-                    System.out.println("type: " + myAnnotation.type());
-                }
-            }
+        StatisticsWriter statisticsWriter = new StatisticsWriter();
+        statisticsWriter.writeStatistics(statistics);
+    }
+
+    @Test
+    public void testStatisticsWriterOfGeneratorWithSortingMethodAndEmptyStatisticsForIt() {
+        Map<String, Map<String, List<Long>>> statistics = new HashMap<>();
+        Map<String, List<Long>> generatorStatistics = new HashMap<>();
+        generatorStatistics.put("Sorting method", new ArrayList<>());
+        statistics.put("Generator", generatorStatistics);
+
+        StatisticsWriter statisticsWriter = new StatisticsWriter();
+        statisticsWriter.writeStatistics(statistics);
+    }
+
+    @Test
+    public void testStatisticsWriterWithNoDirectoryToStoreStatistics() {
+        Map<String, Map<String, List<Long>>> statistics = new HashMap<>();
+        Map<String, List<Long>> generatorStatistics = new HashMap<>();
+        generatorStatistics.put("Sorting method", new ArrayList<>());
+        statistics.put("Generator", generatorStatistics);
+
+        StatisticsWriter statisticsWriter = new StatisticsWriter();
+
+        try {
+            Files.deleteIfExists(Paths.get("C:\\IdeaProjects\\NetCracker\\Lab00\\statistics"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        statisticsWriter.writeStatistics(statistics);
+
+        try {
+            Files.createDirectory(Paths.get("C:\\IdeaProjects\\NetCracker\\Lab00\\statistics"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
