@@ -1,17 +1,18 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
 
 /**
- * @author Horilyi
+ * Created by Roman Horilyi on 24.11.2016.
  */
-@Sortable(name = "No sorting", type = "none")
+@Sorting(name = "No sort", type = "None")
 public class NoSorting implements SortingBehavior {
 
-    /**
-     * Doesn't sort the specified array.
-     */
+    public NoSorting() {
+    }
+
     @Override
     public void sort(int[] array) {
+        // leave our array without any modifications
     }
 }

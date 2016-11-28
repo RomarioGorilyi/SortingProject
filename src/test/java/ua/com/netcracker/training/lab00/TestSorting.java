@@ -2,8 +2,9 @@ package ua.com.netcracker.training.lab00;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ua.com.netcracker.training.lab00.annotation.Sortable;
-import ua.com.netcracker.training.lab00.entity.*;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
+import ua.com.netcracker.training.lab00.generation.RandomGeneration;
+import ua.com.netcracker.training.lab00.generator.*;
 import ua.com.netcracker.training.lab00.sorting.*;
 
 import java.lang.annotation.Annotation;
@@ -13,9 +14,21 @@ import java.lang.reflect.Field;
  * @author Horilyi
  */
 public class TestSorting {
+
     @Test
     public void testBubbleFloatingUpSort() {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
+
+        SortingBehavior sorting = new BubbleFloatingUpSort();
+        int[] sortedArray = sorting.findSortedArray(unsortedArray);
+        int[] expectedSortedArray = {-1, 0, 2, 5, 6, 15, 18};
+
+        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
+    }
+
+    @Test
+    public void testBubbleFloatingUpSortWithAlreadySortedArray() {
+        int[] unsortedArray = {-1, 0, 2, 5, 6, 15, 18};
 
         SortingBehavior sorting = new BubbleFloatingUpSort();
         int[] sortedArray = sorting.findSortedArray(unsortedArray);
@@ -58,6 +71,17 @@ public class TestSorting {
     }
 
     @Test
+    public void testQuickSortWithEmptyArray() {
+        int[] unsortedArray = {};
+
+        SortingBehavior sorting = new QuickSort();
+        int[] sortedArray = sorting.findSortedArray(unsortedArray);
+        int[] expectedSortedArray = {};
+
+        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
+    }
+
+    @Test
     public void testJavaSort() {
         int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
 
@@ -69,19 +93,8 @@ public class TestSorting {
     }
 
     @Test
-    public void testJavaReverseSort() {
-        int[] unsortedArray = {18, 5, -1, 0, 6, 2, 15};
-
-        SortingBehavior sorting = new JavaReverseSort();
-        int[] sortedArray = sorting.findSortedArray(unsortedArray);
-        int[] expectedSortedArray = {18, 15, 6, 5, 2, 0, -1};
-
-        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
-    }
-
-    @Test
     public void testUnsortedGenerator() {
-        NumbersGenerator generator = new UnsortedGenerator();
+        NumbersGenerator generator = new UnsortedGenerator(new RandomGeneration(), new JavaSort());
         int[] numbers = generator.generateNumbers(10);
         for (int number : numbers) {
             System.out.println(number);
@@ -90,7 +103,7 @@ public class TestSorting {
 
     @Test
     public void testAscendingGenerator() {
-        NumbersGenerator generator = new AscendingGenerator();
+        NumbersGenerator generator = new AscendingGenerator(new RandomGeneration(), new JavaSort());
         int[] numbers = generator.generateNumbers(10);
         for (int number : numbers) {
             System.out.println(number);
@@ -99,7 +112,7 @@ public class TestSorting {
 
     @Test
     public void testDescendingGenerator() {
-        NumbersGenerator generator = new DescendingGenerator();
+        NumbersGenerator generator = new DescendingGenerator(new RandomGeneration(), new JavaSort());
         int[] numbers = generator.generateNumbers(10);
         for (int number : numbers) {
             System.out.println(number);
@@ -108,7 +121,7 @@ public class TestSorting {
 
     @Test
     public void testAscendingWithLastRandomGenerator() {
-        NumbersGenerator generator = new AscendingWithLastRandomGenerator();
+        NumbersGenerator generator = new AscendingWithLastRandomGenerator(new RandomGeneration(), new JavaSort());
         int[] numbers = generator.generateNumbers(10);
         for (int number : numbers) {
             System.out.println(number);
@@ -117,7 +130,7 @@ public class TestSorting {
 
     @Test
     public void testSortableAnnotation() {
-        NumbersGenerator generator = new AscendingGenerator();
+        NumbersGenerator generator = new AscendingGenerator(new RandomGeneration(), new JavaSort());
         Field[] fields = generator.getClass().getDeclaredFields();
 
         for (Field field : fields) {
@@ -125,8 +138,8 @@ public class TestSorting {
             Annotation[] annotations = field.getDeclaredAnnotations();
 
             for (Annotation annotation : annotations) {
-                if (annotation instanceof Sortable) {
-                    Sortable myAnnotation = (Sortable) annotation;
+                if (annotation instanceof Sorting) {
+                    Sorting myAnnotation = (Sorting) annotation;
                     System.out.println("name: " + myAnnotation.name());
                     System.out.println("type: " + myAnnotation.type());
                 }

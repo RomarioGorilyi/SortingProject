@@ -1,18 +1,20 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
 
 import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
 
 /**
  * @author Horlyi
  */
-@Sortable(name = "QuickSort", type = "ascending")
+@Sorting(name = "Quick sort", type = "Exchanging")
 public class QuickSort implements SortingBehavior {
 
     @Override
     public void sort(int[] array) {
-        quickSort(array, 0, array.length - 1);
+        if (array.length > 1) {
+            quickSort(array, 0, array.length - 1);
+        }
     }
 
     private void quickSort(int[] array, int leftIndex, int rightIndex) {

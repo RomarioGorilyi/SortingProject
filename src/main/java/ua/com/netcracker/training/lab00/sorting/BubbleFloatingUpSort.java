@@ -1,13 +1,13 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
 
 import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
 
 /**
  * @author Horilyi
  */
-@Sortable(name = "BubbleSort", type = "ascending & floating up")
+@Sorting(name = "Bubble floating up sort", type = "Exchanging")
 public class BubbleFloatingUpSort implements SortingBehavior {
 
     @Override

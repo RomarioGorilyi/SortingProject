@@ -1,13 +1,13 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
 
 import java.util.Arrays;
 
 /**
  * @author Horilyi
  */
-@Sortable(name = "Embedded Java Sorting", type = "ascending")
+@Sorting(name = "Embedded Java sort", type = "Exchanging")
 public class JavaSort implements SortingBehavior {
 
     /**

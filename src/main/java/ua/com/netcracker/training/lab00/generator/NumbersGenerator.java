@@ -1,4 +1,4 @@
-package ua.com.netcracker.training.lab00.entity;
+package ua.com.netcracker.training.lab00.generator;
 
 import ua.com.netcracker.training.lab00.generation.NumbersGenerationBehavior;
 import ua.com.netcracker.training.lab00.sorting.SortingBehavior;
@@ -23,11 +23,13 @@ public abstract class NumbersGenerator {
         this.sortingBehavior = sortingBehavior;
     }
 
-    /**
-     * Generate an array of numbers with the specified quantity of elements.
-     */
-    public int[] generateNumbers(int quantity) {
-        int[] numbers = generationBehavior.generateNumbers(quantity);
-        return sortingBehavior.findSortedArray(numbers);
+    public NumbersGenerationBehavior getGenerationBehavior() {
+        return generationBehavior;
     }
+
+    public SortingBehavior getSortingBehavior() {
+        return sortingBehavior;
+    }
+
+    public abstract int[] generateNumbers(int quantity);
 }

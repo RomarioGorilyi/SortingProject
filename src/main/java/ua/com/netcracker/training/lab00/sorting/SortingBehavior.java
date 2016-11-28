@@ -1,21 +1,17 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
-
 import static ua.com.netcracker.training.lab00.util.ArrayUtil.makeArrayCopy;
 
 /**
  * @author Horilyi
  */
-@Sortable(name = "General Sorting Behavior", type = "none")
 @FunctionalInterface
 public interface SortingBehavior {
 
     /**
-     * Sorts the specified array.
+     * Sorts the specified array in the ascending order.
      *
      * @param array array that has to be sorted
-     * @return sorted specified array
      */
     void sort(int[] array);
 

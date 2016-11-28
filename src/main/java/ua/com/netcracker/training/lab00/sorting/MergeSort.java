@@ -1,11 +1,11 @@
 package ua.com.netcracker.training.lab00.sorting;
 
-import ua.com.netcracker.training.lab00.annotation.Sortable;
+import ua.com.netcracker.training.lab00.annotation.Sorting;
 
 /**
  * @author Horilyi
  */
-@Sortable(name = "MergeSort", type = "ascending")
+@Sorting(name = "Merge sort", type = "Merging")
 public class MergeSort implements SortingBehavior {
 
     @Override
@@ -23,9 +23,10 @@ public class MergeSort implements SortingBehavior {
     }
 
     private void merge(int[] array, int leftIndex, int delimiterIndex, int rightIndex) {
-        int sizeOfLeftSubArray = delimiterIndex - leftIndex + 2;    // increases size of left sub-array by Integer.MAX_VALUE
-                                                                    // in order to avoid ArrayIndexOutOfBoundsException
-                                                                    // in case all numbers of the left sub-array are reached
+        int sizeOfLeftSubArray = delimiterIndex - leftIndex + 2;
+                                                                // increases size of left sub-array by Integer.MAX_VALUE
+                                                                // in order to avoid ArrayIndexOutOfBoundsException
+                                                                // in case all numbers of the left sub-array are reached
         int[] leftSubArray = new int[sizeOfLeftSubArray];
         for (int i = 0; i < sizeOfLeftSubArray - 1; i++) {
             leftSubArray[i] = array[leftIndex + i];
