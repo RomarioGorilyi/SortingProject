@@ -15,17 +15,17 @@ public class BubbleSinkingSort extends BubbleSort {
 
 
     @Override
-    public boolean compare(int number1, int number2) {
+    protected boolean compare(int number1, int number2) {
         return number1 >= number2;
     }
 
     @Override
-    public int shiftIndex(int index) {
+    protected int shiftIndex(int index) {
         return index - 1;
     }
 
     @Override
-    public int shiftIndexOfUnsortedElement(int indexOfUnsortedElement) {
+    protected int shiftIndexOfUnsortedElement(int indexOfUnsortedElement) {
         return indexOfUnsortedElement + 1;
     }
 }

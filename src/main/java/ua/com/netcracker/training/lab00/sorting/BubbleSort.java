@@ -24,9 +24,9 @@ public abstract class BubbleSort implements SortingBehavior {
         } while (swapped && compare(initialIndex, indexOfUnsortedElement));
     }
 
-    public abstract boolean compare(int number1, int number2);
+    protected abstract boolean compare(int number1, int number2);
 
-    public abstract int shiftIndex(int index);
+    protected abstract int shiftIndex(int index);
 
-    public abstract int shiftIndexOfUnsortedElement(int indexOfUnsortedElement);
+    protected abstract int shiftIndexOfUnsortedElement(int indexOfUnsortedElement);
 }
