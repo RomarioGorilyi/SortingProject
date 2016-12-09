@@ -1,7 +1,5 @@
 package ua.com.netcracker.training.lab00.analyzer;
 
-import org.reflections.Reflections;
-import ua.com.netcracker.training.lab00.annotation.Sorting;
 import ua.com.netcracker.training.lab00.generation.NumbersGenerationBehavior;
 import ua.com.netcracker.training.lab00.generation.RandomGeneration;
 import ua.com.netcracker.training.lab00.generator.NumbersGenerator;
@@ -18,16 +16,16 @@ public class Analyzer {
     /**
      * Analyzes performance of number generators with every sorting method.
      *
-     * @return
+     * @param reflector {@code Reflector} instance which gets all relevant classes
+     * @return {@code Map<NumberGenerator, Map<SortingBehavior, List<time of performance>>>}
      */
-    public Map<String, Map<String, List<Long>>> analyzePerformance() {
+    public Map<String, Map<String, List<Long>>> analyzePerformance(Reflector reflector) {
         Map<String, Map<String, List<Long>>> resultStatistics = new HashMap<>();
 
-        Reflections reflections = new Reflections("ua.com.netcracker.training.lab00");
-        Set<Class<? extends NumbersGenerator>> generatorClasses = reflections.getSubTypesOf(NumbersGenerator.class);
+        Set<Class<? extends NumbersGenerator>> generatorClasses = reflector.getGeneratorsClasses();
 
         for (Class<? extends NumbersGenerator> generatorClass : generatorClasses) {
-            Set<Class<?>> sortingClasses = reflections.getTypesAnnotatedWith(Sorting.class);
+            Set<Class<?>> sortingClasses = reflector.getSortingClasses();
 
             Map<String, List<Long>> generatorStatistics = new HashMap<>();
             for (Class<?> sortingClass : sortingClasses) {
