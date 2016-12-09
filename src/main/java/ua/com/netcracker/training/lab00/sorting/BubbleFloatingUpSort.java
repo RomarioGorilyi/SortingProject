@@ -2,27 +2,29 @@ package ua.com.netcracker.training.lab00.sorting;
 
 import ua.com.netcracker.training.lab00.annotation.Sorting;
 
-import static ua.com.netcracker.training.lab00.util.ArrayUtil.swap;
-
 /**
  * @author Horilyi
  */
 @Sorting(name = "Bubble floating up sort", type = "Exchanging")
-public class BubbleFloatingUpSort implements SortingBehavior {
+public class BubbleFloatingUpSort extends BubbleSort {
 
     @Override
     public void sort(int[] array) {
-        boolean swapped = false;
-        int indexOfLastUnsortedElement = array.length - 1;
+        super.sort(array, 0, array.length - 1);
+    }
 
-        do {
-            for (int i = 0; i < indexOfLastUnsortedElement; i++) {
-                if (array[i] > array[i + 1]) {
-                    swap(array, i, i + 1);
-                    swapped = true;
-                }
-            }
-            indexOfLastUnsortedElement--;
-        } while (swapped && indexOfLastUnsortedElement > 0);
+    @Override
+    public boolean compare(int number1, int number2) {
+        return number1 < number2;
+    }
+
+    @Override
+    public int shiftIndex(int index) {
+        return index + 1;
+    }
+
+    @Override
+    public int shiftIndexOfUnsortedElement(int indexOfUnsortedElement) {
+        return indexOfUnsortedElement - 1;
     }
 }
