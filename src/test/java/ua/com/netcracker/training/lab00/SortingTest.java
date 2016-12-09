@@ -37,6 +37,14 @@ public class SortingTest {
     @Rule
     public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
+    // Bubble floating up sort:
+
+    @Test(expected = NullPointerException.class)
+    public void testBubbleFloatingUpSortWithNull() {
+        SortingBehavior sorting = new BubbleFloatingUpSort();
+        sorting.findSortedArray(null);
+    }
+
     @Test
     public void testBubbleFloatingUpSort() {
         SortingBehavior sorting = new BubbleFloatingUpSort();
@@ -45,9 +53,35 @@ public class SortingTest {
         Assert.assertTrue(isArraySorted(sortedArray));
     }
 
+    // Bubble sinking sort:
+
+    @Test(expected = NullPointerException.class)
+    public void testBubbleSinkingSortWithNull() {
+        SortingBehavior sorting = new BubbleSinkingSort();
+        sorting.findSortedArray(null);
+    }
+
     @Test
     public void testBubbleSinkingSort() {
         SortingBehavior sorting = new BubbleSinkingSort();
+        int[] sortedArray = sorting.findSortedArray(unsortedArray);
+
+        Assert.assertTrue(isArraySorted(sortedArray));
+    }
+
+    // Merge sort:
+
+    @Test(expected = NullPointerException.class)
+    public void testMergeSortWithNull() {
+        SortingBehavior sorting = new MergeSort();
+        sorting.findSortedArray(null);
+    }
+
+    @Test
+    public void testMergeSortWithEmptyArray() {
+        int[] unsortedArray = {};
+
+        SortingBehavior sorting = new MergeSort();
         int[] sortedArray = sorting.findSortedArray(unsortedArray);
 
         Assert.assertTrue(isArraySorted(sortedArray));
@@ -61,15 +95,22 @@ public class SortingTest {
         Assert.assertTrue(isArraySorted(sortedArray));
     }
 
+    // Quick sort:
+
+    @Test(expected = NullPointerException.class)
+    public void testQuickSortWithNull() {
+        SortingBehavior sorting = new MergeSort();
+        sorting.findSortedArray(null);
+    }
+
     @Test
-    public void testMergeSortWithEmptyArray() {
+    public void testQuickSortWithEmptyArray() {
         int[] unsortedArray = {};
 
-        SortingBehavior sorting = new MergeSort();
+        SortingBehavior sorting = new QuickSort();
         int[] sortedArray = sorting.findSortedArray(unsortedArray);
-        int[] expectedSortedArray = {};
 
-        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
+        Assert.assertTrue(isArraySorted(sortedArray));
     }
 
     @Test
@@ -80,15 +121,22 @@ public class SortingTest {
         Assert.assertTrue(isArraySorted(sortedArray));
     }
 
+    // Java sort:
+
+    @Test(expected = NullPointerException.class)
+    public void testJavaSortWithNull() {
+        SortingBehavior sorting = new JavaSort();
+        sorting.findSortedArray(null);
+    }
+
     @Test
-    public void testQuickSortWithEmptyArray() {
+    public void testJavaSortWithEmptyArray() {
         int[] unsortedArray = {};
 
-        SortingBehavior sorting = new QuickSort();
+        SortingBehavior sorting = new JavaSort();
         int[] sortedArray = sorting.findSortedArray(unsortedArray);
-        int[] expectedSortedArray = {};
 
-        Assert.assertArrayEquals(expectedSortedArray, sortedArray);
+        Assert.assertTrue(isArraySorted(sortedArray));
     }
 
     @Test
